@@ -17,7 +17,7 @@ Remove old snapshots once per day - set daily cron to remove snapshots and creat
 
 
 ## Installation
-### Step 1 - reconfigure your startup script
+### Step 1 - Reconfigure your Nodeos startup script.
 
 * We need to modify your startup scripts to point our --data-dir to our ZFS volumes. 
 * My volume is called eos.
@@ -39,7 +39,7 @@ $DATADIR/stop.sh
 $NODEOS --data-dir $ZFS --config-dir $DATADIR "$@" > $DATADIR/stdout.txt 2> $DATADIR/stderr.txt &  echo $! > $DATADIR/nodeos.pid
 ```
 
-### Step 2 - Install zfs-backuyp script.
+### Step 2 - Install zfs-backup script.
 
 * Download and place the zfs-backup.sh in a folder of your choice.
 * Give executable permissions ```Chmod +x /opt/scripts/zfs-backup.sh```
@@ -47,7 +47,7 @@ $NODEOS --data-dir $ZFS --config-dir $DATADIR "$@" > $DATADIR/stdout.txt 2> $DAT
 
 ### Step 3 - Create Cronfile to run hourly at minute 59.
 
-* Add the following to your /etc/cron.d. (or your users cron using crontab -e)
+* Add the following to your /etc/cron.d.
 * replace %username% what you use to start and stop nodeos
 * ```*/59 * * * * root sudo -u charles  "/opt/scripts/zfs-backup.sh"```
 
