@@ -1,6 +1,11 @@
 ### zfs-snapshot
 
 The following script allows you to create ZFS snapshots of EOS blocks/ and state/  folders.
+Please note this is not for block producers, as you need to stop your nodeos process.
+
+#### TO-DO
+
+Remove old snapshots once per day - set daily cron to remove snapshots and create new one and then let hourly take over.
 
 
 #### Requirements
