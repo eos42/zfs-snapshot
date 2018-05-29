@@ -9,7 +9,13 @@ The following script allows you to create ZFS snapshots of EOS blocks/ and state
 * ZFS volume 
 * When starting nodeos you should point your data-dir to your ZFS volume.
 
-Example startup script that poins --data-dir to my ZFS volumed called eos.
+
+
+## Installation
+### Step 1 - reconfigure your startup script
+
+* We need to modify your startup scripts to point our --data-dir to our ZFS volumes. 
+* My volume is called eos.
 
 ```
 #!/bin/bash
@@ -28,7 +34,20 @@ $DATADIR/stop.sh
 $NODEOS --data-dir $ZFS --config-dir $DATADIR "$@" > $DATADIR/stdout.txt 2> $DATADIR/stderr.txt &  echo $! > $DATADIR/nodeos.pid
 ```
 
+### Step 2 - Install zfs-backuyp script.
+
+* Download and place the zfs-backup.sh in a folder of your choice.
+* Give executable permissions ```Chmod +x /opt/scripts/zfs-backup.sh```
 
 
+### Step 3 - Create Cronfile.
 
-*/15 * * * * sudo -u charles  "/opt/scripts/zfs-backup.sh"
+* Add the following to your /etc/cron.d. (or your users cron using crontab -e)
+* replace %username% what you use to start and stop nodeos
+* ```*/15 * * * * root sudo -u &username% "/opt/scripts/zfs-backup.sh"```
+
+
+### Addtional information.
+* The reasoning behind sudo -u %username% is because we want nodeos to start with a non root user, but we need ZFS to run as root. 
+
+
