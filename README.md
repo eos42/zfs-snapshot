@@ -45,11 +45,11 @@ $NODEOS --data-dir $ZFS --config-dir $DATADIR "$@" > $DATADIR/stdout.txt 2> $DAT
 * Give executable permissions ```Chmod +x /opt/scripts/zfs-backup.sh```
 
 
-### Step 3 - Create Cronfile to run hourly at minute 59.
+### Step 3 - Create Cronfile to run hourly at minute 5.
 
 * Add the following to your /etc/cron.d.
 * replace %username% what you use to start and stop nodeos
-* ```*/59 * * * * root sudo -u charles  "/opt/scripts/zfs-backup.sh"```
+* ```5 * * * * root sudo -u charles  "/opt/scripts/zfs-backup.sh"```
 
 
 ### Addtional information.
