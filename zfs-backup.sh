@@ -17,4 +17,4 @@ FILESYSTEM="eos"
 $DATA_DIR/stop.sh
 sleep 3
 sudo zfs snapshot $FILESYSTEM@$SNAPSHOT_NAME
-$DATA_DIR/stop.sh
+$DATA_DIR/start.sh
