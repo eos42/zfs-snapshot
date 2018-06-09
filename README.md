@@ -56,3 +56,12 @@ $NODEOS --data-dir $ZFS --config-dir $DATADIR "$@" > $DATADIR/stdout.txt 2> $DAT
 * The reasoning behind sudo -u %username% is because we want nodeos to start with a non root user, but we need ZFS to run as root. 
 
 
+#### Setup cron script to remove all but the last ZFS snapshot
+
+`zfs list -t snapshot -o name | grep ^eos@A | tac | tail -n +16 | xargs -n 1 zfs destroy -r`
+* output the list of snapshot (names only) with zfs list -t snaphot -o name
+* filter to keep only the ones that match tank@Auto with grep ^eos@
+* reverse the list (previously sorted from oldest to newest) with tac
+* limit output to the 16th oldest result and following with tail -n +16
+* then destroy with xargs -n 1 zfs destroy -vr
+
