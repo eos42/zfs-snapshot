@@ -1,0 +1,11 @@
+
+
+#### List current ZFS snapshots
+
+`zfs list -r -t snapshot`
+
+
+
+#### Check status of ZFS snapshot
+
+`zpool status`
