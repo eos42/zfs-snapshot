@@ -13,8 +13,9 @@ SNAPSHOT_NAME=`date -d "now" +'%Y_%m_%d-%H_%M'`
 FILESYSTEM="eos"
 
 
-# Stop Nodeos
+# Stop Nodeos & Wallet service
 $DATA_DIR/stop.sh
+$DATA_DIR/cleo.sh wallet stop
 sleep 3
 sudo zfs snapshot $FILESYSTEM@$SNAPSHOT_NAME
 $DATA_DIR/start.sh
