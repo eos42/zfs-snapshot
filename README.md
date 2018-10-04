@@ -65,3 +65,22 @@ $NODEOS --data-dir $ZFS --config-dir $DATADIR "$@" > $DATADIR/stdout.txt 2> $DAT
 * limit output to the 16th oldest result and following with tail -n +16
 * then destroy with xargs -n 1 zfs destroy -vr
 
+
+## Revert back to a snapshot
+
+### Step 1 - Stop your nodeos process & delete current blocks and state
+
+### Step 2 - List and revert back to latest snapshot
+
+```
+sudo zfs list -t snapshot  
+NAME                   USED  AVAIL  REFER  MOUNTPOINT
+eos@2018_10_04-19_24  1.02G      -  56.4G  -
+eos@2018_10_04-19_43   967M      -  56.4G  -
+eos@2018_10_04-19_59   970M      -  56.4G  -
+```
+
+```sudo zfs rollback -r eos@2018_10_04-19_59```
+
+### Step 3 - Restart nodeos process.
+
